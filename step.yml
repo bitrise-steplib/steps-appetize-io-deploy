@@ -1,0 +1,84 @@
+title: Appetize.io deploy
+summary: Deploy the app to Appetize.io
+description: |-
+  Deploy your app to Appetize.io and run it in your browser.
+  For app demos, training, customer support, development, testing, and more.
+website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
+
+project_type_tags:
+  - ios
+  - android
+  - xamarin
+  - react-native
+  - cordova
+  - ionic
+type_tags:
+  - deploy
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: go
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appetize-io-deploy
+
+inputs:
+  - app_path:
+    opts:
+      title: Application path
+      summary: The full path to the application file (.app or .apk)
+      description: The full path to the application file (.app or .apk)
+      is_expand: true
+      is_required: true
+  - platform: "ios"
+    opts:
+      title: Platform
+      summary: Select the type of your application
+      description: Select the type of your application
+      is_expand: true
+      is_required: true
+      value_options:
+        - ios
+        - android
+  - appetize_token:
+    opts:
+      title: Appetize.io token
+      summary: The token provided by Appetize.io
+      description: |-
+        The token provided by Appetize.io
+        
+        **NOTE:** You can reaquest an api token for Appetioze.io here:
+        [Appetioze.io/request-api-token](https://appetize.io/docs#request-api-token)
+      is_expand: true
+      is_required: true
+  - public_key:
+    opts:
+      title: Public key
+      summary: "The public key in case you want to deploy this to build to an existing app"
+      description: "The public key in case you want to deploy this to build to an existing app"
+      is_expand: true
+      is_required: false
+  - verbose: false
+    opts:
+      category: Debug
+      title: Enable debug logging
+      summary: "Enable debug log option for better debug"
+      description: "Enable debug log option for better debug"
+      is_expand: true
+      is_required: true
+      value_options:
+        - true
+        - false
+
+outputs:
+  - APPETIZE_APP_URL:
+    opts:
+      title: Public URL for the app
+      summary: The public URL to use the app
+      description: The public URL to use the app
+      is_expand: false
+      is_required: true
