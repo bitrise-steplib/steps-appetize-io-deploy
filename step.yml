@@ -40,7 +40,7 @@ inputs:
         The token provided by Appetize.io
         
         **NOTE:** You can reaquest an api token for Appetioze.io here:
-        [Appetioze.io/request-api-token](https://appetize.io/docs#request-api-token)
+        [Appetize.io/request-api-token](https://appetize.io/docs#request-api-token)
       is_expand: true
       is_required: true
   - public_key:

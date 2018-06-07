@@ -47,18 +47,10 @@ func NewArtifact(filePath string) (Artifact, error) {
 	extension := path.Ext(filePath)
 
 	switch extension {
-	case ".zip":
-		art := Artifact{filePath: filePath, platform: IOS, extension: ZIP}
-		return art, nil
-	case ".gz":
-		art := Artifact{filePath: filePath, platform: IOS, extension: GZ}
-		return art, nil
-	case ".app":
-		art := Artifact{filePath: filePath, platform: IOS, extension: APP}
-		return art, nil
+	case ".zip", ".gz", ".app":
+		return Artifact{filePath: filePath, platform: IOS, extension: Extension(extension)}, nil
 	case ".apk":
-		art := Artifact{filePath: filePath, platform: Android, extension: APK}
-		return art, nil
+		return Artifact{filePath: filePath, platform: Android, extension: APK}, nil
 	}
 
 	return Artifact{}, fmt.Errorf("bad file extension. For iOS, upload a .zip or .tar.gz file containing your compressed .app bundle. For Android, upload the .apk containing your app. Provided file's extension: %s. You can read more about it here: https://appetize.io/upload", extension)
