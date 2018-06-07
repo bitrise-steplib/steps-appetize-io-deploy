@@ -20,12 +20,12 @@ const apiEndPoint = "@api.appetize.io/v1/apps"
 
 // Client ...
 type Client struct {
-	token     string
-	baseURL   string
-	client    *http.Client
-	appPath   string
-	platform  string
-	publicKey string
+	token      string
+	baseURL    string
+	httpClient *http.Client
+	appPath    string
+	artifact   Artifact
+	publicKey  string
 }
 
 // Response ...
@@ -49,20 +49,20 @@ type Response struct {
 // -- Public methods
 
 // NewClient ...
-func NewClient(token, appPath, platform, publicKey string) *Client {
+func NewClient(token string, appPath string, artifact Artifact, publicKey string) *Client {
 	baseURL := baseURL(token, appPath, publicKey)
 	return &Client{
-		token:    token,
-		baseURL:  baseURL,
-		client:   &http.Client{},
-		appPath:  appPath,
-		platform: platform,
+		token:      token,
+		baseURL:    baseURL,
+		httpClient: &http.Client{},
+		appPath:    appPath,
+		artifact:   artifact,
 	}
 }
 
 // DirectFileUpload ...
 func (client *Client) DirectFileUpload() (Response, error) {
-	request, err := createRequest(client.baseURL, client.appPath, client.platform)
+	request, err := createRequest(client.baseURL, client.appPath, string(client.artifact.Platform()))
 	if err != nil {
 		return Response{}, err
 	}
@@ -73,15 +73,13 @@ func (client *Client) DirectFileUpload() (Response, error) {
 }
 
 func createRequest(url, appPath, platform string) (*http.Request, error) {
-	var err error
-	var f *os.File
-	var fi os.FileInfo
-
-	if f, err = os.Open(appPath); err != nil {
+	f, err := os.Open(appPath)
+	if err != nil {
 		log.Errorf("%s", err)
 	}
 
-	if fi, err = f.Stat(); err != nil {
+	fi, err := f.Stat()
+	if err != nil {
 		log.Errorf("%s", err)
 	}
 
@@ -96,24 +94,26 @@ func createRequest(url, appPath, platform string) (*http.Request, error) {
 
 	// file
 	{
-		var part io.Writer
-		if part, err = mpw.CreateFormFile("file", fi.Name()); err != nil {
+		part, err := mpw.CreateFormFile("file", fi.Name())
+		if err != nil {
 			log.Errorf("%s", err)
 		}
 
-		if _, err = io.Copy(part, f); err != nil {
+		_, err = io.Copy(part, f)
+		if err != nil {
 			log.Errorf("%s", err)
 		}
 	}
 
 	// platform
 	{
-		var field io.Writer
-		if field, err = mpw.CreateFormField("platform"); err != nil {
+		field, err := mpw.CreateFormField("platform")
+		if err != nil {
 			log.Errorf("%s", err)
 		}
 
-		if _, err = io.Copy(field, strings.NewReader(platform)); err != nil {
+		_, err = io.Copy(field, strings.NewReader(platform))
+		if err != nil {
 			log.Errorf("%s", err)
 		}
 	}
@@ -122,8 +122,8 @@ func createRequest(url, appPath, platform string) (*http.Request, error) {
 		log.Errorf("%s", err)
 	}
 
-	var req *http.Request
-	if req, err = http.NewRequest(http.MethodPost, url, &b); err != nil {
+	req, err := http.NewRequest(http.MethodPost, url, &b)
+	if err != nil {
 		return nil, err
 	}
 
@@ -131,8 +131,11 @@ func createRequest(url, appPath, platform string) (*http.Request, error) {
 	return req, nil
 }
 
+// -------------------------------------
+// -- Private methods
+
 func (client *Client) performRequest(req *http.Request, requestResponse interface{}) ([]byte, error) {
-	response, err := client.client.Do(req)
+	response, err := client.httpClient.Do(req)
 	if err != nil {
 		// On error, any Response can be ignored
 		return nil, fmt.Errorf("failed to perform request, error: %s", err)

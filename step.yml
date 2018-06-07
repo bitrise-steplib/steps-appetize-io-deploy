@@ -3,17 +3,12 @@ summary: Deploy the app to Appetize.io
 description: |-
   Deploy your app to Appetize.io and run it in your browser.
   For app demos, training, customer support, development, testing, and more.
+
+  **NOTE:** For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app bundle or the `.app` bundle. For Android, provide the `.apk` containing your app. 
 website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
 source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
 support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
-
-project_type_tags:
-  - ios
-  - android
-  - xamarin
-  - react-native
-  - cordova
-  - ionic
+  
 type_tags:
   - deploy
 deps:
@@ -30,20 +25,13 @@ inputs:
   - app_path:
     opts:
       title: Application path
-      summary: The full path to the application file (.app or .apk)
-      description: The full path to the application file (.app or .apk)
+      summary: The full path to the application file (.app, .zip, .tar.gz, or .apk)
+      description: |-
+        The full path to the application file (.app, .zip, .tar.gz, or .apk)
+
+        **NOTE:** For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app bundle or the `.app` bundle. For Android, provide the `.apk` containing your app. 
       is_expand: true
       is_required: true
-  - platform: "ios"
-    opts:
-      title: Platform
-      summary: Select the type of your application
-      description: Select the type of your application
-      is_expand: true
-      is_required: true
-      value_options:
-        - ios
-        - android
   - appetize_token:
     opts:
       title: Appetize.io token
@@ -64,10 +52,9 @@ inputs:
       is_required: false
   - verbose: false
     opts:
-      category: Debug
-      title: Enable debug logging
-      summary: "Enable debug log option for better debug"
-      description: "Enable debug log option for better debug"
+      title: Enable verbose logging
+      summary: "Enable verbose log option for better debug"
+      description: "Enable verbose log option for better debug"
       is_expand: true
       is_required: true
       value_options:
