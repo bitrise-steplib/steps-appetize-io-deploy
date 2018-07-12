@@ -76,7 +76,7 @@ func main() {
 
 	logDebugPretty(&response)
 
-	appURL := path.Join("https://appetize.io/app", response.PublicKey)
+	appURL := "https://" + path.Join("appetize.io/app", response.PublicKey)
 	log.Printf("You can check your app at: %s", appURL)
 	fmt.Println()
 
