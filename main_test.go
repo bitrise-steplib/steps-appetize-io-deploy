@@ -11,18 +11,18 @@ func Test_generateAppURL(t *testing.T) {
 	}{
 		{
 			name:      "test_1",
-			publicKey: "u2c556dxrxjfjzyh0xgpvb1tvr",
-			want:      "https://appetize.io/app/u2c556dxrxjfjzyh0xgpvb1tvr",
+			publicKey: "u2c556dxrxjfjzy",
+			want:      "https://appetize.io/app/u2c556dxrxjfjzy",
 		},
 		{
 			name:      "test_2",
-			publicKey: "u2c556dxrxjfjzyh0xgpvb1tvr",
-			want:      "https://appetize.io/app/u2c556dxrxjfjzyh0xgpvb1tvr",
+			publicKey: "h0xgpvb1tvr",
+			want:      "https://appetize.io/app/h0xgpvb1tvr",
 		},
 		{
 			name:      "test_3",
-			publicKey: "u2c556dxrxjfjzyh0xgpvb1tvr",
-			want:      "https://appetize.io/app/u2c556dxrxjfjzyh0xgpvb1tvr",
+			publicKey: "lkwo92okosss",
+			want:      "https://appetize.io/app/lkwo92okosss",
 		},
 	}
 	for _, tt := range tests {
