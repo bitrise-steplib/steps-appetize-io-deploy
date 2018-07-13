@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"net/url"
 	"os"
 	"path"
 
@@ -76,7 +77,8 @@ func main() {
 
 	logDebugPretty(&response)
 
-	appURL := path.Join("https://appetize.io/app", response.PublicKey)
+	appURL := generateAppURL(response.PublicKey)
+
 	log.Printf("You can check your app at: %s", appURL)
 	fmt.Println()
 
@@ -94,6 +96,15 @@ func main() {
 
 // -------------------------------------
 // -- Private methods
+
+func generateAppURL(publicKey string) string {
+	u := url.URL{
+		Scheme: "https",
+		Host:   "appetize.io",
+		Path:   path.Join("app", publicKey),
+	}
+	return u.String()
+}
 
 func failf(format string, v ...interface{}) {
 	log.Errorf(format, v...)
