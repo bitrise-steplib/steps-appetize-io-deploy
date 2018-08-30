@@ -30,7 +30,6 @@ inputs:
         The full path to the application file (.app, .zip, .tar.gz, or .apk)
 
         **NOTE:** For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app bundle or the `.app` bundle. For Android, provide the `.apk` containing your app. 
-      is_expand: true
       is_required: true
   - appetize_token:
     opts:
@@ -41,14 +40,13 @@ inputs:
         
         **NOTE:** You can reaquest an api token for Appetioze.io here:
         [Appetize.io/request-api-token](https://appetize.io/docs#request-api-token)
-      is_expand: true
       is_required: true
+      is_sensitive: true
   - public_key:
     opts:
       title: Public key
       summary: "The public key in case you want to deploy this to build to an existing app."
       description: "The public key in case you want to deploy this to build to an existing app."
-      is_expand: true
       is_required: false
   - verbose: false
     opts:
