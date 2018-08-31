@@ -45,10 +45,10 @@ inputs:
   - public_key:
     opts:
       title: Public key
-      summary: "The public key in case you want to deploy this to build to an existing app."
-      description: "The public key in case you want to deploy this to build to an existing app."
+      summary: "The public key in case you want to deploy this to build to an existing app"
+      description: "The public key in case you want to deploy this to build to an existing app"
       is_required: false
-  - verbose: false
+  - verbose: "false"
     opts:
       title: Enable verbose logging
       summary: "Enable verbose log option for better debug"
@@ -56,8 +56,8 @@ inputs:
       is_expand: true
       is_required: true
       value_options:
-        - true
-        - false
+        - "true"
+        - "false"
 
 outputs:
   - APPETIZE_APP_URL:
