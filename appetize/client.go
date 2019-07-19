@@ -25,7 +25,6 @@ type Client struct {
 	httpClient *http.Client
 	appPath    string
 	artifact   Artifact
-	publicKey  string
 }
 
 // Response ...
