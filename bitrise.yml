@@ -289,15 +289,11 @@ workflows:
     - path::./:
         title: Public key Test
         description: |-
-          The example input has a default value,
-          you can overwrite it if you want to, just like we did below,
-          but the step would use the default value specified in the `step.yml`
-          file if you would not specify another value.
         inputs:
         - app_path: ./apps/Android.apk
         - platform: android
         - appetize_token: ${TOKEN}
-        - public_key: renbn24wbwhm45a21gwd9krgmm
+        - public_key: ${PUBLIC_KEY}
         run_if: true
     - script:
         title: Output check
