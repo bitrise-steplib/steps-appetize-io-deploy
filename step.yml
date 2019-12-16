@@ -11,11 +11,6 @@ support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
   
 type_tags:
   - deploy
-deps:
-  brew:
-  - name: go
-  apt_get:
-  - name: go
 
 toolkit:
   go:
@@ -38,21 +33,21 @@ inputs:
       description: |-
         The token provided by Appetize.io
         
-        **NOTE:** You can reaquest an api token for Appetioze.io here:
+        **NOTE:** You can reaquest an api token for Appetize.io here:
         [Appetize.io/request-api-token](https://appetize.io/docs#request-api-token)
       is_required: true
       is_sensitive: true
   - public_key:
     opts:
       title: Public key
-      summary: "The public key in case you want to deploy this to build to an existing app"
-      description: "The public key in case you want to deploy this to build to an existing app"
+      summary: "The public key in case you want to deploy this build to an existing app"
+      description: "The public key in case you want to deploy this build to an existing app"
       is_required: false
   - verbose: "false"
     opts:
       title: Enable verbose logging
-      summary: "Enable verbose log option for better debug"
-      description: "Enable verbose log option for better debug"
+      summary: "Enable verbose log option for better debugging"
+      description: "Enable verbose log option for better debugging"
       is_expand: true
       is_required: true
       value_options:
