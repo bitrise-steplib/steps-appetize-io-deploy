@@ -43,6 +43,18 @@ inputs:
       summary: "The public key in case you want to deploy this build to an existing app"
       description: "The public key in case you want to deploy this build to an existing app"
       is_required: false
+  - appetize_api: "@api.appetize.io/v1/apps"
+    opts:
+      title: Appetize.io api endpoint
+      summary: "Allows for customized Appetize.io api endpoints, default is @api.appetize.io/v1/apps"
+      description: "Allows for customized Appetize.io api endpoints, default is @api.appetize.io/v1/apps"
+      is_required: true
+  - appetize_host: "appetize.io"
+    opts:
+      title: Appetize.io host
+      summary: "Allows for customized Appetize.io hosts, default is appetize.io"
+      description: "Allows for customized Appetize.io hosts, default is appetize.io"
+      is_required: true
   - verbose: "false"
     opts:
       title: Enable verbose logging
