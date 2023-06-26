@@ -107,6 +107,7 @@ func IsDirExists(pth string) (bool, error) {
 }
 
 // AbsPath expands ENV vars and the ~ character
+//
 //	then call Go's Abs
 func AbsPath(pth string) (string, error) {
 	if pth == "" {
@@ -170,7 +171,9 @@ func UserHomeDir() string {
 // NormalizedOSTempDirPath ...
 // Creates a temp dir, and returns its path.
 // If tmpDirNamePrefix is provided it'll be used
-//  as the tmp dir's name prefix.
+//
+//	as the tmp dir's name prefix.
+//
 // Normalized: it's guaranteed that the path won't end with '/'.
 func NormalizedOSTempDirPath(tmpDirNamePrefix string) (retPth string, err error) {
 	retPth, err = ioutil.TempDir("", tmpDirNamePrefix)

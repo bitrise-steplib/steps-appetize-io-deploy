@@ -16,7 +16,6 @@ import (
 	"github.com/bitrise-io/go-utils/log"
 )
 
-
 // Client ...
 type Client struct {
 	token      string
