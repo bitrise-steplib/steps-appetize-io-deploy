@@ -16,8 +16,6 @@ import (
 	"github.com/bitrise-io/go-utils/log"
 )
 
-const apiEndPoint = "@api.appetize.io/v1/apps"
-
 // Client ...
 type Client struct {
 	token      string
@@ -48,8 +46,8 @@ type Response struct {
 // -- Public methods
 
 // NewClient ...
-func NewClient(token string, appPath string, artifact Artifact, publicKey string) *Client {
-	baseURL := baseURL(token, appPath, publicKey)
+func NewClient(token string, appPath string, artifact Artifact, publicKey string, apiEndPoint string) *Client {
+	baseURL := baseURL(token, appPath, publicKey, apiEndPoint)
 	return &Client{
 		token:      token,
 		baseURL:    baseURL,
@@ -165,7 +163,7 @@ func (client *Client) performRequest(req *http.Request, requestResponse interfac
 	return body, nil
 }
 
-func baseURL(token, appPath, publicKey string) string {
+func baseURL(token, appPath, publicKey string, apiEndPoint string) string {
 	baseURL := token + apiEndPoint
 
 	if publicKey != "" {

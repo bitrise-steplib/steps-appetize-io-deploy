@@ -17,10 +17,12 @@ var debugMode bool
 
 // Config ...
 type Config struct {
-	AppPath   string          `env:"app_path,required"`
-	Token     stepconf.Secret `env:"appetize_token,required"`
-	PublicKey string          `env:"public_key"`
-	Verbose   bool            `env:"verbose,required"`
+	AppPath      string          `env:"app_path,required"`
+	Token        stepconf.Secret `env:"appetize_token,required"`
+	PublicKey    string          `env:"public_key"`
+	AppetizeApi  string          `env:"appetize_api"`
+	AppetizeHost string          `env:"appetize_host"`
+	Verbose      bool            `env:"verbose,required"`
 }
 
 func main() {
@@ -57,7 +59,7 @@ func main() {
 	log.Infof("Upload")
 
 	// Network section
-	client := appetize.NewClient(string(cfg.Token), pth, artifact, cfg.PublicKey)
+	client := appetize.NewClient(string(cfg.Token), pth, artifact, cfg.PublicKey, cfg.AppetizeApi)
 
 	if cfg.PublicKey == "" {
 		log.Warnf("🚨 No public key provided")
@@ -77,7 +79,7 @@ func main() {
 
 	logDebugPretty(&response)
 
-	appURL := generateAppURL(response.PublicKey)
+	appURL := generateAppURL(response.PublicKey, cfg.AppetizeHost)
 
 	log.Printf("You can check your app at: %s", appURL)
 	fmt.Println()
@@ -97,10 +99,10 @@ func main() {
 // -------------------------------------
 // -- Private methods
 
-func generateAppURL(publicKey string) string {
+func generateAppURL(publicKey string, host string) string {
 	u := url.URL{
 		Scheme: "https",
-		Host:   "appetize.io",
+		Host:   host,
 		Path:   path.Join("app", publicKey),
 	}
 	return u.String()
