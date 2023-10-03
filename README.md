@@ -1,9 +1,27 @@
 # Appetize.io deploy
 
-Deploy the app to Appetize.io
+## 📄 Description
 
+Bitrise step to facilitate deployment of your app to Appetize.io
 
-## How to use this Step
+## :arrow_right: Inputs
+
+| Name           | Description                                                                               | Required           | Default                  |
+|----------------|-------------------------------------------------------------------------------------------|--------------------|--------------------------|
+| app_path       | The full path to the application file (.app, .zip, .tar.gz, or .apk)                      | :white_check_mark: |                          |
+| appetize_token | The API token provided by Appetize.io                                                     | :white_check_mark: |                          |
+| public_key     | The public key in case you want to deploy this build to an existing app                   |                    |                          |
+| appetize_api   | Allows for customized Appetize.io API endpoints, e.g. Public vs Private Cloud deployments | :white_check_mark: | @api.appetize.io/v1/apps |
+| appetize_host  | Allows for customized Appetize.io hosts, e.g. Public vs Private Cloud deployments         | :white_check_mark: | appetize.io              |
+
+## :arrow_left: Outputs
+| Name             | Description               |
+|------------------|---------------------------|
+| APPETIZE_APP_URL | The URL to access the app |
+
+## 🛠 Developer Setup
+
+### How to use this Step
 
 Can be run directly with the [bitrise CLI](https://github.com/bitrise-io/bitrise),
 just `git clone` this repository, `cd` into it's folder in your Terminal/Command Line
@@ -31,7 +49,7 @@ envs:
 - A_SECRET_PARAM_TWO: the value for secret two
 ```
 
-## How to create your own step
+### How to create your own step
 
 1. Create a new git repository for your step (**don't fork** the *step template*, create a *new* repository)
 2. Copy the [step template](https://github.com/bitrise-steplib/step-template) files into your repository
@@ -61,7 +79,7 @@ If you want to use your step in your project's `bitrise.yml`:
 You can find more examples of step reference styles
 in the [bitrise CLI repository](https://github.com/bitrise-io/bitrise/blob/master/_examples/tutorials/steps-and-workflows/bitrise.yml#L65).
 
-## How to contribute to this Step
+### How to contribute to this Step
 
 1. Fork this repository
 2. `git clone` it
@@ -77,7 +95,7 @@ in the [bitrise CLI repository](https://github.com/bitrise-io/bitrise/blob/maste
 7. Once you're done just commit your changes & create a Pull Request
 
 
-## Share your own Step
+### Share your own Step
 
 You can share your Step or step version with the [bitrise CLI](https://github.com/bitrise-io/bitrise). If you use the `bitrise.yml` included in this repository, all you have to do is:
 
@@ -92,7 +110,7 @@ You can share your Step or step version with the [bitrise CLI](https://github.co
 
 That's all ;)
 
-## Trigger a new release
+### Trigger a new release
 
 - __merge every code changes__ to the `master` branch
 - __push the new version tag__ to the `master` branch
